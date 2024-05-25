@@ -1,20 +1,25 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
+import { getPersistedValue, persistValue } from "@/utils/storage";
 import Image from "next/image";
 import Link from "next/link";
 
 export const Nav = () => {
-  const session = useSession();
+  const session = getPersistedValue<any>("user.profile");
+  const userId: string = session?.username.split(" ")[0] ?? "userId";
 
   return (
     <nav className="flex flex-col items-center justify-between w-24 min-h-full bg-kinemoe-950/30 backdrop-blur-lg z-10 shrink-0">
       <Link
-        href={`/user/${session.data?.user?.email?.split("@")[0]}/profile`}
+        href={
+          !session
+            ? "/auth/signin"
+            : `/user/${userId.toLocaleLowerCase()}/profile`
+        }
         className="flex justify-center items-center w-full h-24"
       >
         <Image
-          src={session.data?.user?.image ?? "/images/icons/User.svg"}
+          src={session?.image ?? "/images/icons/User.svg"}
           alt=""
           width={56}
           height={56}
@@ -65,7 +70,7 @@ export const Nav = () => {
       </div>
       <button
         type="button"
-        onClick={() => signOut()}
+        onClick={() => persistValue("user.profile", undefined)}
         className="flex justify-center items-center w-full h-24"
       >
         <Image

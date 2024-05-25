@@ -6,14 +6,15 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { WatchVideoComment } from "./watchVideoComment";
 import { Comment } from "@/types/comment";
 import { videoCommentsMockData } from "./watchVideoCommentsMockData";
-import { useSession } from "next-auth/react";
+import { getPersistedValue } from "@/utils/storage";
 
 type Props = {
   movieId: string;
 };
 
 export const WatchVideoComments = ({ movieId }: Props) => {
-  const session = useSession();
+  const session = getPersistedValue<any>("user.profile");
+
   // get comments from API by movieID
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -33,15 +34,15 @@ export const WatchVideoComments = ({ movieId }: Props) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!session.data?.user || comment.trim().length === 0) return;
+    if (!session || comment.trim().length === 0) return;
 
     setComments((prevState) => [
       ...prevState,
       {
-        id: session.data?.user?.email?.split("@")[0] ?? "",
+        id: session?.username?.split(" ")[0].toLocaleLowerCase() ?? "",
         author: {
-          name: session.data?.user?.name ?? "",
-          image: session.data?.user?.image ?? "",
+          name: session?.username ?? "",
+          image: session?.image ?? "",
         },
         text: comment,
       },

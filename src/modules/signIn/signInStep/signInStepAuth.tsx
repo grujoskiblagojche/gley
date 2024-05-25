@@ -3,14 +3,14 @@
 
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import { SignInStep } from "../signInStepFormTypes";
-import { signIn, useSession } from "next-auth/react";
+import { getPersistedValue } from "@/utils/storage";
 
 type Props = {
   setActiveStep: (step: SignInStep) => void;
 };
 
 export const SignInStepAuth = ({ setActiveStep }: Props) => {
-  const session = useSession();
+  const session = getPersistedValue<any>("user.profile");
 
   const [formData, setFormData] = useState<{ email: string; password: string }>(
     {
@@ -32,7 +32,7 @@ export const SignInStepAuth = ({ setActiveStep }: Props) => {
   };
 
   useEffect(() => {
-    if (!session.data) return;
+    if (!session) return;
 
     handleSetActiveStep(SignInStep.artist);
   }, [session, handleSetActiveStep]);
@@ -105,7 +105,7 @@ export const SignInStepAuth = ({ setActiveStep }: Props) => {
           <button
             type="button"
             className="relative mb-6 text-kinemoe-50 hover:text-kinemoe-100 text-xl flex items-center justify-center bg-kinemoe-900/30 hover:bg-kinemoe-900/60 shadow-lg active:shadow-md active:scale-95 rounded-full py-3 px-6 outline-none transition-all w-full"
-            onClick={() => signIn("google")}
+            onClick={() => handleSetActiveStep(SignInStep.artist)}
           >
             <img
               src="/images/icons/google.svg"
@@ -117,7 +117,7 @@ export const SignInStepAuth = ({ setActiveStep }: Props) => {
           <button
             type="button"
             className="relative text-kinemoe-50 hover:text-kinemoe-100 text-xl flex items-center justify-center bg-kinemoe-900/30 hover:bg-kinemoe-900/60 shadow-lg active:shadow-md active:scale-95 rounded-full py-3 px-6 outline-none transition-all w-full"
-            onClick={() => signIn("facebook", { callbackUrl: "/auth/signin" })}
+            onClick={() => handleSetActiveStep(SignInStep.artist)}
           >
             <img
               src="/images/icons/facebook.svg"

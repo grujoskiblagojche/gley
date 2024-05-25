@@ -1,3 +1,5 @@
+"use client";
+
 import { Movie } from "@/types/movie";
 import { cn } from "@/utils/className";
 

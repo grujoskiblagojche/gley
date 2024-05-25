@@ -4,18 +4,18 @@ const mockVideoComments: Comment[] = [
   {
     id: "1",
     author: {
-        image: 'natasha',
-        name: 'Наташа'
+      image: "/images/users/natasha.png",
+      name: "Наташа",
     },
-    text: 'Најомилениот филм на татко ми ...'
+    text: "Најомилениот филм на татко ми ...",
   },
   {
     id: "2",
     author: {
-        image: 'sime',
-        name: 'Симе'
+      image: "/images/users/sime.png",
+      name: "Симе",
     },
-    text: 'Колку добра сцена!'
+    text: "Колку добра сцена!",
   },
 ];
 

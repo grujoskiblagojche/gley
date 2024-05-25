@@ -1,24 +1,18 @@
-// import { homeHeaderMockData } from "./homeHeaderMockData";
+"use client";
 
 import Image from "next/image";
 import { Nav } from "@/shared/nav";
-import { getServerSession } from "next-auth";
 import { WatchVideoComment } from "../watch/watchVideoComment";
 import {
   profileCommentsMockData,
   profileMoviesMockData,
 } from "./profileMockData";
-import { MovieCategories } from "@/shared/movieCategories";
-import { MovieType } from "@/types/movie";
 import { MovieCard } from "@/shared/movieCard";
 import { CircleProgressBar } from "@/shared/circleProgressBar";
+import { getPersistedValue } from "@/utils/storage";
 
-type Props = {
-  userId: string;
-};
-
-export const Profile = async ({ userId }: Props) => {
-  const session = await getServerSession();
+export const Profile = () => {
+  const session = getPersistedValue<any>("user.profile");
 
   const comments = profileCommentsMockData();
   const watchedMovies = profileMoviesMockData();
@@ -26,8 +20,8 @@ export const Profile = async ({ userId }: Props) => {
   const profileComments = comments.map((comment) => ({
     ...comment,
     author: {
-      image: session?.user?.image ?? "",
-      name: session?.user?.name ?? "",
+      image: session?.image ?? "",
+      name: session?.username ?? "",
     },
   }));
 
@@ -42,14 +36,14 @@ export const Profile = async ({ userId }: Props) => {
       <div className="flex flex-1 bg-kinemoe-950 mt-44 w-full">
         <div className="flex flex-col items-center bg-kinemoe-800 px-8 rounded-br-3xl w-full max-w-[376px] text-center shrink-0">
           <Image
-            src={session?.user?.image ?? ""}
-            alt={session?.user?.name ?? ""}
+            src={session?.image ?? ""}
+            alt={session?.username ?? ""}
             width={214}
             height={214}
             className="w-48 h-48 shrink-0 rounded-full -mt-24 mb-4 shadow-xl"
           />
           <h3 className="text-2xl font-bold text-kinemoe-50">
-            {session?.user?.name ?? ""}
+            {session?.username ?? ""}
           </h3>
           <span className="text-base text-kinemoe-200">Movie Enjoyer</span>
           <p className="text-base text-kinemoe-100 my-6">
@@ -84,7 +78,7 @@ export const Profile = async ({ userId }: Props) => {
         </div>
         <div className="flex flex-col flex-1 py-6 pl-8 w-full overflow-hidden">
           <h4 className="text-xl font-bold text-kinemoe-50">
-            Comments by {session?.user?.name}:
+            Comments by {session?.username}:
           </h4>
           <div className="flex flex-col gap-3 my-8 w-3/5">
             {profileComments.map((comment, i) => (
@@ -96,13 +90,13 @@ export const Profile = async ({ userId }: Props) => {
             ))}
           </div>
           <h4 className="text-xl font-bold text-kinemoe-50 mb-8">
-            What {session?.user?.name} watched:
+            What {session?.username} watched:
           </h4>
           <div className="flex flex-1">
             <div className="flex items-center gap-5 w-full">
-              {watchedMovies.map((movie) => (
+              {watchedMovies.map((movie, i) => (
                 <MovieCard
-                  key={movie.id}
+                  key={i}
                   movie={movie}
                   className="relative w-[256px] h-[368px] shrink-0 shadow-lg shadow-kinemoe-950 hover:scale-105 hover:z-50"
                 />

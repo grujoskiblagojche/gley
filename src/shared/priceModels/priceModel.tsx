@@ -26,7 +26,7 @@ export const PriceModel = ({ priceModel }: Props) => (
       </ul>
       <div className="flex w-full p-6">
         <Link
-          href={"/"}
+          href="/auth/signin"
           className="text-green-50 hover:text-green-100 bg-green-600 hover:bg-green-700 shadow-lg active:shadow-md shadow-green-800 hover:shadow-green-900 active:scale-95 text-2xl font-bold rounded-2xl p-4 w-full outline-none text-center transition-all"
         >
           REGISTER

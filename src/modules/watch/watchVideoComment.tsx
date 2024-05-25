@@ -1,3 +1,5 @@
+"use client";
+
 import { Comment } from "@/types/comment";
 import { cn } from "@/utils/className";
 import Image from "next/image";
@@ -8,10 +10,6 @@ type Props = {
 };
 
 export const WatchVideoComment = ({ comment, className }: Props) => {
-  const imageSrc = comment.author.image.includes("https") // Image coming from API
-    ? comment.author.image
-    : `/images/users/${comment.author.image}.png`; // Mock image using 'name'
-
   return (
     <div
       className={cn(
@@ -21,7 +19,7 @@ export const WatchVideoComment = ({ comment, className }: Props) => {
     >
       <div className="flex items-center gap-2">
         <Image
-          src={imageSrc}
+          src={comment.author.image}
           alt={comment.author.name}
           width={36}
           height={36}

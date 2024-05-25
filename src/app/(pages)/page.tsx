@@ -5,17 +5,11 @@ import { Footer } from "@/shared/footer";
 import { PriceModels } from "@/shared/priceModels/priceModels";
 import { PageProps } from "@/types/page";
 import { NextPage } from "next";
-import { getServerSession } from "next-auth";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 const Page: NextPage<PageProps> = async () => {
-  const session = await getServerSession();
-
-  if (session) redirect("/home");
-
   return (
     <>
       <main className="pb-48">
