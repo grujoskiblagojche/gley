@@ -41,7 +41,7 @@ export const HomeHeader = () => {
           </p>
           <div className="flex gap-6 items-center mt-24">
             <Link
-              href="/"
+              href={`/movies/${activeMovie?.id}/watch`}
               className="flex items-center gap-4 bg-green-600 hover:bg-green-700 shadow-lg active:shadow-md shadow-green-800 hover:shadow-green-900 active:scale-95 rounded-lg p-3 pr-6 outline-none transition-all"
             >
               <Image

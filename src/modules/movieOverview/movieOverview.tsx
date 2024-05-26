@@ -34,7 +34,7 @@ export const MovieOverview = async ({ movieId }: Props) => {
             <p className="text-white text-md w-2/3">{movie?.longInfo ?? ""}</p>
             <div className="flex gap-6 items-center mt-12">
               <Link
-                href="/"
+                href={`/movies/${movie.id}/watch`}
                 className="flex items-center gap-4 bg-gre bg-green-600 hover:bg-green-700 shadow-lg active:shadow-md shadow-green-800 hover:shadow-green-900 active:scale-95 rounded-lg p-3 pr-6 outline-none transition-all"
               >
                 <Image

@@ -11,7 +11,7 @@ export const LandingMovieRoomGroup = ({ group }: Props) => {
   return (
     <div className="flex flex-col items-center gap-4">
       <h3 className="text-kinemoe-100 text-3xl font-bold">{group.room}</h3>
-      <Link href={"/"} className="flex w-full max-w-[585px]">
+      <Link href={"/movies"} className="flex w-full max-w-[585px]">
         {group.movies.map((movie, i) => (
           <MovieCard
             key={i}

@@ -40,7 +40,10 @@ export const Nav = () => {
             className="w-9 h-9"
           />
         </Link>
-        <Link href="/" className="flex justify-center items-center w-full h-24">
+        <Link
+          href="/home"
+          className="flex justify-center items-center w-full h-24"
+        >
           <Image
             src="/images/icons/Vector.svg"
             alt=""
@@ -49,7 +52,10 @@ export const Nav = () => {
             className="w-9 h-9"
           />
         </Link>
-        <Link href="/" className="flex justify-center items-center w-full h-24">
+        <Link
+          href="/home"
+          className="flex justify-center items-center w-full h-24"
+        >
           <Image
             src="/images/icons/wpf_chat.svg"
             alt=""
@@ -58,7 +64,10 @@ export const Nav = () => {
             className="w-9 h-9"
           />
         </Link>
-        <Link href="/" className="flex justify-center items-center w-full h-24">
+        <Link
+          href="/movies"
+          className="flex justify-center items-center w-full h-24"
+        >
           <Image
             src="/images/icons/bx_camera-movie.svg"
             alt=""

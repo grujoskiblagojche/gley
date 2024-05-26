@@ -13,8 +13,10 @@ type Props = {
 
 export const ArtistCard = ({ artist, className }: Props) => (
   <Link
-    href={"/"}
-    // href={`/artists/${artist.name}`}
+    href={`/actor/${artist.name
+      .split(" ")
+      .join("-")
+      .toLocaleLowerCase()}/overview`}
     className={cn(
       "relative flex flex-col justify-between items-center rounded-[56px] bg-gradient-to-tr from-kinemoe-800 to-kinemoe-950 shadow-xl hover:shadow-2xl hover:scale-105 shadow-kinemoe-950 pt-14 transition-all w-full max-w-[586px] overflow-hidden aspect-[4/5]",
       className
